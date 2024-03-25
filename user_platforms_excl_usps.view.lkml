@@ -80,7 +80,7 @@ view: user_platforms_excl_usps {
                        (SELECT
                             -- Date filter for whole query --> What dates range are we looking to pull?
                             '20230101' AS query_start_filter,
-                            '20240131' AS query_end_filter,
+                            '20240301' AS query_end_filter,
                             -- BELOW IS TO TOGGLE WHETHER OR NOT ESI/ CEC ACCOUNTS ARE INCLUDED/ EXCLUDED FROM QUERY
                             --'EXCLUDE ESI, CEC'
                             'INCLUDE ESI, NO CEC'
