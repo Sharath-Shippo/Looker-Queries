@@ -7,7 +7,7 @@ include: "*.view.lkml"               # include all views in the views/ folder in
 # # Select the views that should be a part of this model,
 # # and define the joins that connect them together.
 #
-explore: breakage_analysis {
+explore: breakage_analysis_2 {
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;
