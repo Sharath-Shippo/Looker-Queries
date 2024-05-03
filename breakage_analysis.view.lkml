@@ -1,7 +1,8 @@
 
 view: breakage_analysis {
   derived_table: {
-    sql: --BREAKAGE QUERY BY CARRIER (UPS, USPS, FEDEX) FOR ACCOUNTING, UNUSED LABEL = FIRST SCAN DATE IS NOT NULL, REMOVE REFUNDS PURCHASED OUT OF PERIOD
+    sql:
+     --BREAKAGE QUERY BY CARRIER (UPS, USPS, FEDEX) FOR ACCOUNTING, UNUSED LABEL = FIRST SCAN DATE IS NOT NULL, REMOVE REFUNDS PURCHASED OUT OF PERIOD
       WITH query_variables AS
               (
               SELECT
@@ -526,7 +527,8 @@ view: breakage_analysis {
           --AND user_id IN ('1715460')
           --AND tracking_number IN ('92001901755477006001781820')
       GROUP BY carrier_name, purchase_month, track_first_event_month --service_level_name, entry_method, --, refund_month --user_id, company_name --carrier_service_level_name
-      ORDER BY carrier_name, no_labels_purchased DESC  --entry_method, --no_labels_refunded DESC --carrier_service_level_name, no_labels_purchased desc ;;
+      ORDER BY carrier_name, no_labels_purchased DESC --entry_method, --no_labels_refunded DESC --carrier_service_level_name, no_labels_purchased desc ;;
+
   }
 
   measure: count {
