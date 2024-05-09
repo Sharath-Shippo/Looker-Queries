@@ -7,7 +7,7 @@ view: breakage_analysis {
               (
               SELECT
               -- Date filter for whole query --> What PURCHASE DATE range are we looking to pull?
-              '2023-01-01 00:00:00'::timestamp AS query_start_timestamp_filter,
+                '2023-06-01 00:00:00'::timestamp AS query_start_timestamp_filter,
                 current_date::timestamp AS query_end_timestamp_filter
               )
 
@@ -19,6 +19,7 @@ view: breakage_analysis {
           --user_id,
           --company_name,
           TO_CHAR(TO_DATE(purchase_date,'YYYY-MM-DD'),'YYYY-MM') as purchase_month,
+          TO_CHAR(TO_DATE(purchase_date,'YYYY-MM-DD')) as purchase_date,
           TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM') as track_first_event_month,
           --CASE WHEN
           --    query IN ('purchase_refund_in_period')
@@ -547,6 +548,11 @@ view: breakage_analysis {
     sql: ${TABLE}.purchase_month ;;
   }
 
+  dimension: purchase_date {
+    type: string
+    sql: ${TABLE}.purchase_date ;;
+  }
+
   dimension: track_first_event_month {
     type: string
     sql: ${TABLE}.track_first_event_month ;;
@@ -621,6 +627,7 @@ view: breakage_analysis {
     fields: [
         carrier_name,
   purchase_month,
+  purchase_date,
   track_first_event_month,
   avg_cost_per_lbl,
   no_labels_purchased,
