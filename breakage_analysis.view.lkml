@@ -19,7 +19,7 @@ view: breakage_analysis {
           --user_id,
           --company_name,
           TO_CHAR(TO_DATE(purchase_date,'YYYY-MM-DD'),'YYYY-MM') as purchase_month,
-          TO_CHAR(TO_DATE(purchase_date,'YYYY-MM-DD')) as purchase_date,
+          TO_CHAR(TO_DATE(purchase_date,'YYYY-MM-DD'),'YYYY-MM-DD') as purchase_date,
           TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM') as track_first_event_month,
           --CASE WHEN
           --    query IN ('purchase_refund_in_period')
