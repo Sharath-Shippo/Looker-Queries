@@ -5,6 +5,7 @@ view: partner_commissions {
           'Partner Commissions' as Category,
            case when registration_source_mapped in ('1440','boxstorm','fishbowl','freestyle','integrasoft','orangemarmalade','spoton','veeqo','zibbet') then 'RegSource'
          when registration_source_mapped in ('square') then 'WeeblySquare'
+        when registration_source_mapped in ('loupe tech inc.') then 'loupe tech inc.'
          when registration_source_mapped in ('westerncomputer','commerce7') then 'Other'
          when registration_source_mapped in ('snapfulfil') then 'snapfulfil'
          when registration_source_mapped in ('woocommerce','godaddy','bigcommerce') then 'StorePlatforms'
@@ -248,7 +249,7 @@ view: partner_commissions {
       --;
           )
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
-      where registration_source_mapped in ('fishbowl','freestyle','boxstorm','orangemarmalade','zibbet','veeqo','integrasoft','shuup','spoton','1440','square','westerncomputer','commerce7')
+      where registration_source_mapped in ('fishbowl','freestyle','boxstorm','orangemarmalade','zibbet','veeqo','integrasoft','shuup','spoton','1440','square','westerncomputer','commerce7','loupe tech inc.')
         --and transaction_type in ('Purchase','Refund')
       GROUP BY 1,2,3,4,5,6,7,8,9,10,11
 
@@ -259,6 +260,7 @@ view: partner_commissions {
           'Partner Commissions' as Category,
             case when registration_source_mapped in ('1440','boxstorm','fishbowl','freestyle','integrasoft','orangemarmalade','spoton','veeqo','zibbet') then 'RegSource'
          when registration_source_mapped in ('square') then 'WeeblySquare'
+        when registration_source_mapped in ('loupe tech inc.') then 'loupe tech inc.'
          when registration_source_mapped in ('westerncomputer','commerce7') then 'Other'
          when registration_source_mapped in ('snapfulfil') then 'snapfulfil'
          when registration_source_mapped in ('woocommerce','godaddy','bigcommerce') then 'StorePlatforms'
@@ -512,6 +514,7 @@ view: partner_commissions {
           'Partner Commissions' as Category,
             case when registration_source_mapped in ('1440','boxstorm','fishbowl','freestyle','integrasoft','orangemarmalade','spoton','veeqo','zibbet') then 'RegSource'
          when registration_source_mapped in ('square') then 'WeeblySquare'
+        when registration_source_mapped in ('loupe tech inc.') then 'loupe tech inc.'
          when registration_source_mapped in ('westerncomputer','commerce7') then 'Other'
          when registration_source_mapped in ('snapfulfil') then 'snapfulfil'
          when registration_source_mapped in ('woocommerce','godaddy','bigcommerce') then 'StorePlatforms'
@@ -763,6 +766,7 @@ view: partner_commissions {
           'Partner Commissions' as Category,
             case when registration_source_mapped in ('1440','boxstorm','fishbowl','freestyle','integrasoft','orangemarmalade','spoton','veeqo','zibbet') then 'RegSource'
          when registration_source_mapped in ('square') then 'WeeblySquare'
+        when registration_source_mapped in ('loupe tech inc.') then 'loupe tech inc.'
          when registration_source_mapped in ('westerncomputer','commerce7') then 'Other'
          when registration_source_mapped in ('snapfulfil') then 'snapfulfil'
          when registration_source_mapped in ('woocommerce','godaddy','bigcommerce') then 'StorePlatforms'
@@ -1012,6 +1016,7 @@ SELECT
     'Partner Commissions' as Category,
       case when registration_source_mapped in ('1440','boxstorm','fishbowl','freestyle','integrasoft','orangemarmalade','spoton','veeqo','zibbet') then 'RegSource'
          when registration_source_mapped in ('square') then 'WeeblySquare'
+        when registration_source_mapped in ('loupe tech inc.') then 'loupe tech inc.'
          when registration_source_mapped in ('westerncomputer','commerce7') then 'Other'
          when registration_source_mapped in ('snapfulfil') then 'snapfulfil'
          when registration_source_mapped in ('woocommerce','godaddy','bigcommerce') then 'StorePlatforms'
@@ -1261,6 +1266,7 @@ SELECT
     'Partner Commissions' as Category,
      case when registration_source_mapped in ('1440','boxstorm','fishbowl','freestyle','integrasoft','orangemarmalade','spoton','veeqo','zibbet') then 'RegSource'
          when registration_source_mapped in ('square') then 'WeeblySquare'
+        when registration_source_mapped in ('loupe tech inc.') then 'loupe tech inc.'
          when registration_source_mapped in ('westerncomputer','commerce7') then 'Other'
          when registration_source_mapped in ('snapfulfil') then 'snapfulfil'
          when registration_source_mapped in ('woocommerce','godaddy','bigcommerce') then 'StorePlatforms'
