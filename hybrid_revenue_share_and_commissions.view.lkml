@@ -237,7 +237,7 @@ registration_source_commission,
       --;
           )
       where  carrier_own_account_indicator<>'Managed 3rd Party Master Account'
-        and registration_source_mapped in ('shiphero','squarespace','jetti','ShipHero', 'shiphero-prospect','loupe tech inc')
+        and registration_source_mapped in ('shiphero','squarespace','jetti','ShipHero', 'shiphero-prospect','loupe tech inc.')
 
         --and transaction_type in ('Purchase','Refund')
       GROUP BY 1,2,3,4,5,6,7,8
