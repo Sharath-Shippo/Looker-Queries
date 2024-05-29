@@ -34,8 +34,8 @@ view: vip_revshare_insurance {
               WITH query_variables AS
                        (SELECT
                             -- Date filter for whole query --> What dates range are we looking to pull?
-                            '20230101' AS query_start_filter,
-                            '20240401' AS query_end_filter,
+                            '20230801' AS query_start_filter,
+                            '20240601' AS query_end_filter,
                             -- BELOW IS TO TOGGLE WHETHER OR NOT ESI/ CEC ACCOUNTS ARE INCLUDED/ EXCLUDED FROM QUERY
                             --'EXCLUDE ESI, CEC'
                             'INCLUDE ESI, NO CEC'
@@ -232,8 +232,8 @@ view: vip_revshare_insurance {
               WITH query_variables AS
                        (SELECT
                             -- Date filter for whole query --> What dates range are we looking to pull?
-                            '20230101' AS query_start_filter,
-                            '20240401' AS query_end_filter,
+                            '20230801' AS query_start_filter,
+                            '20240601' AS query_end_filter,
                             -- BELOW IS TO TOGGLE WHETHER OR NOT ESI/ CEC ACCOUNTS ARE INCLUDED/ EXCLUDED FROM QUERY
                             --'EXCLUDE ESI, CEC'
                             'INCLUDE ESI, NO CEC'
