@@ -193,7 +193,8 @@ view: vip_revshare_insurance {
       --;
           )
       where user_id  IN (11015, 330296)
-        and transaction_type in ('Purchase','Refund')
+        and transaction_type in ('Purchase','Refund','Carrier Refund','Customer Refund'
+)
       GROUP BY 1,2,3,4,5,6,7,8,9,10,11
       having COALESCE(SUM(insurance_price_usd), 0) <> 0
 
@@ -391,7 +392,7 @@ view: vip_revshare_insurance {
       --;
           )
       where  (platform_name ) IN ('Popshop', 'Whatnot')
-        and transaction_type in ('Purchase','Refund')
+        and transaction_type in ('Purchase','Refund','Carrier Refund','Customer Refund')
       GROUP BY 1,2,3,4,5,6,7,8,9,10,11
       having COALESCE(SUM(insurance_price_usd), 0) <> 0 ;;
   }
