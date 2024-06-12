@@ -242,7 +242,7 @@ view: lookerdata_post_cec {
       --where store_platform_name in ('WIX')
       where  (user_id ) IN (11015, 37459, 39201, 66839, 76309, 83220, 119927, 127393, 312217, 344222, 353540, 372750, 476778, 492898, 613191, 754014, 784211, 1369129, 1412312, 1479903)
         and ((carrier_name ) <> 'USPS' OR (carrier_name ) IS NULL)
-        and transaction_type in ('Purchase','Refund')
+        and transaction_type in ('Purchase','Refund','Carrier Refund','Customer Refund')
       GROUP BY 1,2,3,4,5,6,7,8,9 ;;
   }
 
