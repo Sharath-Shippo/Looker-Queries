@@ -425,7 +425,7 @@ view: breakage_analysis {
                   (
                   --'Purchase'
                   --,
-                  'Refund',
+                  'Refund'
                   --'Carrier Refund',
                   --'Customer Refund'
                       -- ,
