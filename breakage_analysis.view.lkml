@@ -8,7 +8,7 @@ view: breakage_analysis {
               SELECT
               -- Date filter for whole query --> What PURCHASE DATE range are we looking to pull?
                 '2023-01-01 00:00:00'::timestamp AS query_start_timestamp_filter,
-                '2024-05-01 00:00:00'::timestamp AS query_end_timestamp_filter
+                current_date::timestamp AS query_end_timestamp_filter
               )
 
       SELECT
