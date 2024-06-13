@@ -561,67 +561,67 @@ view: breakage_analysis {
   }
 
   measure: avg_cost_per_lbl {
-    type: sum
+    type: number
     sql: ${TABLE}.avg_cost_per_lbl ;;
   }
 
   measure: no_labels_purchased {
-    type: sum
+    type: number
     sql: ${TABLE}.no_labels_purchased ;;
   }
 
   measure: no_labels_refunded {
-    type: sum
+    type: number
     sql: ${TABLE}.no_labels_refunded ;;
   }
 
   measure: no_unused_labels_purchased_from_status {
-    type: sum
+    type: number
     sql: ${TABLE}.no_unused_labels_purchased_from_status ;;
   }
 
   measure: no_unused_labels_refunded_from_status {
-    type: sum
+    type: number
     sql: ${TABLE}.no_unused_labels_refunded_from_status ;;
   }
 
   measure: no_unused_labels_purchased {
-    type: sum
+    type: number
     sql: ${TABLE}.no_unused_labels_purchased ;;
   }
 
   measure: no_unused_labels_refunded {
-    type: sum
+    type: number
     sql: ${TABLE}.no_unused_labels_refunded ;;
   }
 
   measure: label_purchase_cost {
-    type: sum
+    type: number
     sql: ${TABLE}.label_purchase_cost ;;
   }
 
   measure: refunded_label_cost {
-    type: sum
+    type: number
     sql: ${TABLE}.refunded_label_cost ;;
   }
 
   measure: unused_label_cost_from_status {
-    type: sum
+    type: number
     sql: ${TABLE}.unused_label_cost_from_status ;;
   }
 
   measure: unused_label_refund_cost_from_status {
-    type: sum
+    type: number
     sql: ${TABLE}.unused_label_refund_cost_from_status ;;
   }
 
   measure: unused_label_cost {
-    type: sum
+    type: number
     sql: ${TABLE}.unused_label_cost ;;
   }
 
   measure: unused_label_refund_cost {
-    type: sum
+    type: number
     sql: ${TABLE}.unused_label_refund_cost ;;
   }
 
