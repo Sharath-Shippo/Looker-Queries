@@ -426,8 +426,8 @@ view: breakage_analysis {
                   --'Purchase'
                   --,
                   'Refund',
-                  'Carrier Refund',
-                  'Customer Refund'
+                  --'Carrier Refund',
+                  --'Customer Refund'
                       -- ,
                   --'Surcharge',
                   --'Adjustment',
