@@ -564,7 +564,7 @@ view: breakage_analysis {
 
   dimension: transaction_type {
     type: string
-    sql: ${TABLE}.carrier_name ;;
+    sql: ${TABLE}.transaction_type ;;
   }
   measure: avg_cost_per_lbl {
     type: average
