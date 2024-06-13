@@ -18,9 +18,11 @@ view: breakage_analysis {
           --entry_method,
           --user_id,
           --company_name,
+
           TO_CHAR(TO_DATE(purchase_date,'YYYY-MM-DD'),'YYYY-MM') as purchase_month,
           TO_DATE(purchase_date,'YYYY-MM-DD') as purchase_date,
           TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM') as track_first_event_month,
+          transaction_type,
           --CASE WHEN
           --    query IN ('purchase_refund_in_period')
           --    THEN TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM')
@@ -425,9 +427,9 @@ view: breakage_analysis {
                   (
                   --'Purchase'
                   --,
-                  'Refund'
-                  --'Carrier Refund',
-                  --'Customer Refund'
+                  'Refund',
+                  'Carrier Refund',
+                  'Customer Refund'
                       -- ,
                   --'Surcharge',
                   --'Adjustment',
@@ -529,7 +531,7 @@ view: breakage_analysis {
 
           --AND user_id IN ('1715460')
           --AND tracking_number IN ('92001901755477006001781820')
-      GROUP BY carrier_name, purchase_month,purchase_date, track_first_event_month --service_level_name, entry_method, --, refund_month --user_id, company_name --carrier_service_level_name
+      GROUP BY carrier_name, purchase_month,purchase_date, track_first_event_month,transaction_type --service_level_name, entry_method, --, refund_month --user_id, company_name --carrier_service_level_name
       --ORDER BY carrier_name, no_labels_purchased DESC
        ;;
 
@@ -560,6 +562,10 @@ view: breakage_analysis {
     sql: ${TABLE}.track_first_event_month ;;
   }
 
+  dimension: transaction_type {
+    type: string
+    sql: ${TABLE}.carrier_name ;;
+  }
   measure: avg_cost_per_lbl {
     type: average
     sql: ${TABLE}.avg_cost_per_lbl ;;
@@ -631,6 +637,7 @@ view: breakage_analysis {
   purchase_month,
   purchase_date,
   track_first_event_month,
+  transaction_type,
   avg_cost_per_lbl,
   no_labels_purchased,
   no_labels_refunded,
