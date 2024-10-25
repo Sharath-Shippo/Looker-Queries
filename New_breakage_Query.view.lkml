@@ -6,8 +6,8 @@ view: sql_runner_query {
                (
                    SELECT
                        -- Date filter for whole query --> What PURCHASE DATE range are we looking to pull?
-                       '2023-01-01 00:00:00'::timestamp AS query_start_timestamp_filter,
-                       '2023-02-01 00:00:00'::timestamp AS query_end_timestamp_filter
+                       '2023-10-01 00:00:00'::timestamp AS query_start_timestamp_filter,
+                       current_date::timestamp AS query_end_timestamp_filter
                )
 
       SELECT
