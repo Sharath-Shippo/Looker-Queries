@@ -19,6 +19,7 @@ view: sql_runner_query {
           --company_name,
           TO_CHAR(TO_DATE(purchase_date,'YYYY-MM-DD'),'YYYY-MM') as purchase_month,
           TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM') as track_first_event_month,
+          TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM') as track_first_scan_month,
           --CASE WHEN
           --    query IN ('purchase_refund_in_period')
           --    THEN TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM')
@@ -410,6 +411,7 @@ view: sql_runner_query {
                   ttd.transaction_type,
                   ptd.parcel_type,
                   tfed.full_date                                      track_first_event_date,
+                  firscn.full_date.                                   track_first_scan_date
                   tled.full_date                                      track_last_event_date,
                   tded.full_date                                      track_delivery_event_date,
                   tced.full_date                                      track_created_event_date,
@@ -661,7 +663,7 @@ view: sql_runner_query {
 
       --AND user_id IN ('1715460')
       --AND tracking_number IN ('92001901755477006001781820')
-      GROUP BY carrier_name, purchase_month, track_first_event_month --service_level_name, entry_method, --, refund_month --user_id, company_name --carrier_service_level_name
+      GROUP BY carrier_name, purchase_month, track_first_event_month,track_first_scan_month --service_level_name, entry_method, --, refund_month --user_id, company_name --carrier_service_level_name
       ORDER BY carrier_name, no_labels_purchased DESC;;
   }
 
@@ -683,6 +685,11 @@ view: sql_runner_query {
   dimension: track_first_event_month {
     type: string
     sql: ${TABLE}.track_first_event_month ;;
+  }
+
+  dimension: track_first_scan_month {
+    type: string
+    sql: ${TABLE}.track_first_scan_month ;;
   }
 
   measure: avg_cost_per_lbl {
@@ -795,6 +802,7 @@ view: sql_runner_query {
         carrier_name,
   purchase_month,
   track_first_event_month,
+  track_first_scan_month,
   avg_cost_per_lbl,
   no_labels_purchased,
   no_labels_refunded,
