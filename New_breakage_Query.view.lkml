@@ -411,7 +411,7 @@ view: sql_runner_query {
                   ttd.transaction_type,
                   ptd.parcel_type,
                   tfed.full_date                                      track_first_event_date,
-                  firscn.full_date.                                   track_first_scan_date
+                  firscn.full_date                                   track_first_scan_date,
                   tled.full_date                                      track_last_event_date,
                   tded.full_date                                      track_delivery_event_date,
                   tced.full_date                                      track_created_event_date,
