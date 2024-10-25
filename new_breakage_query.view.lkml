@@ -9,7 +9,7 @@ view: new_breakage_query {
                        '2023-01-01 00:00:00'::timestamp AS query_start_timestamp_filter,
                        '2023-02-01 00:00:00'::timestamp AS query_end_timestamp_filter
                )
-      
+
       SELECT
           carrier_name,
           --service_level_name,
@@ -24,7 +24,7 @@ view: new_breakage_query {
           --    THEN TO_CHAR(TO_DATE(track_first_event_date,'YYYY-MM-DD'),'YYYY-MM')
           --    END AS test,
           --TO_CHAR(TO_DATE(refund_date,'YYYY-MM-DD'), 'YYYY-MM') as refund_month,
-      
+
           AVG(
                   CASE WHEN
                                query IN ('purchase_refund_in_period')
@@ -114,7 +114,7 @@ view: new_breakage_query {
                              )
                          THEN tracking_number
                     END) no_unused_labels_refunded_from_status,
-      
+
           --First Event Date--
           COUNT(DISTINCT
                 CASE WHEN
@@ -142,7 +142,7 @@ view: new_breakage_query {
                              )
                          THEN tracking_number
                     END) no_unused_labels_refunded_from_FirstEvent,
-      
+
           --Delivery Date--
           COUNT(DISTINCT
                 CASE WHEN
@@ -170,7 +170,7 @@ view: new_breakage_query {
                              )
                          THEN tracking_number
                     END) no_unused_labels_refund_from_DeliveryDate,
-      
+
           --First Scan Date--
           COUNT(DISTINCT
                 CASE WHEN
@@ -198,7 +198,7 @@ view: new_breakage_query {
                              )
                          THEN tracking_number
                     END) no_unused_labels_refund_from_firstscan,
-      
+
       --    COUNT(DISTINCT
       --        CASE WHEN
       --            (
@@ -352,7 +352,7 @@ view: new_breakage_query {
                                )
                            THEN COALESCE(ref_shippo_cost,0)*-1
                       END) unused_label_refund_cost_from_firstscan
-      
+
       --,
       --    SUM(
       --        CASE WHEN --unused_label_cost
@@ -380,8 +380,8 @@ view: new_breakage_query {
       --            )
       --            THEN COALESCE(ref_shippo_cost,0)*-1
       --            END) remaining_unused_label_cost
-      
-      
+
+
       FROM
           (
               SELECT DISTINCT
@@ -498,14 +498,14 @@ view: new_breakage_query {
                                )
                            THEN 'unused'
                       END AS unused_labels_from_First_Scan
-      
+
               --lf.invoice_id,
               --lf.postage_est_cost_usd                           est_postage_cost,
               --lf.insurance_price_usd                            insurance_fee,
               --lf.insurance_cost_usd                             insurance_cost,
               --lf.invoiced_paid_usd                              inv_paid
               FROM prod.label_fact lf
-      
+
                        LEFT JOIN prod.service_level_dim sld ON lf.service_level_dim_id = sld.service_level_dim_id
                        LEFT JOIN prod.date_dim dd ON lf.purchase_date_dim_id = dd.date_dim_id
                        LEFT JOIN prod.postal_code_dim opcd ON lf.source_zip_dim_id = opcd.postal_code_dim_id
@@ -644,7 +644,7 @@ view: new_breakage_query {
               --AND ud.company_name NOT LIKE ('gmail.com-%')
               --AND ud.company_name NOT LIKE ('gmail.com')
           )
-      
+
       --WHERE
       --((
       --refund_status IN ('SUCCESS')
@@ -658,7 +658,7 @@ view: new_breakage_query {
       --            refund_status IS NULL
       --    )
       --)
-      
+
       --AND user_id IN ('1715460')
       --AND tracking_number IN ('92001901755477006001781820')
       GROUP BY carrier_name, purchase_month, track_first_event_month --service_level_name, entry_method, --, refund_month --user_id, company_name --carrier_service_level_name
@@ -685,137 +685,137 @@ view: new_breakage_query {
     sql: ${TABLE}.track_first_event_month ;;
   }
 
-  dimension: avg_cost_per_lbl {
-    type: number
+  measure: avg_cost_per_lbl {
+    type: sum
     sql: ${TABLE}.avg_cost_per_lbl ;;
   }
 
-  dimension: no_labels_purchased {
-    type: number
+  measure: no_labels_purchased {
+    type: sum
     sql: ${TABLE}.no_labels_purchased ;;
   }
 
-  dimension: no_labels_refunded {
-    type: number
+  measure: no_labels_refunded {
+    type: sum
     sql: ${TABLE}.no_labels_refunded ;;
   }
 
-  dimension: no_unused_labels_purchased_from_status {
-    type: number
+  measure: no_unused_labels_purchased_from_status {
+    type: sum
     sql: ${TABLE}.no_unused_labels_purchased_from_status ;;
   }
 
-  dimension: no_unused_labels_refunded_from_status {
-    type: number
+  measure: no_unused_labels_refunded_from_status {
+    type: sum
     sql: ${TABLE}.no_unused_labels_refunded_from_status ;;
   }
 
-  dimension: no_unused_labels_purchased_from_firstevent {
-    type: number
+  measure: no_unused_labels_purchased_from_firstevent {
+    type: sum
     sql: ${TABLE}.no_unused_labels_purchased_from_firstevent ;;
   }
 
-  dimension: no_unused_labels_refunded_from_firstevent {
-    type: number
+  measure: no_unused_labels_refunded_from_firstevent {
+    type: sum
     sql: ${TABLE}.no_unused_labels_refunded_from_firstevent ;;
   }
 
-  dimension: no_unused_labels_purchased_from_deliverydate {
-    type: number
+  measure: no_unused_labels_purchased_from_deliverydate {
+    type: sum
     sql: ${TABLE}.no_unused_labels_purchased_from_deliverydate ;;
   }
 
-  dimension: no_unused_labels_refund_from_deliverydate {
-    type: number
+  measure: no_unused_labels_refund_from_deliverydate {
+    type: sum
     sql: ${TABLE}.no_unused_labels_refund_from_deliverydate ;;
   }
 
-  dimension: no_unused_labels_purchased_from_firstscan {
-    type: number
+  measure: no_unused_labels_purchased_from_firstscan {
+    type: sum
     sql: ${TABLE}.no_unused_labels_purchased_from_firstscan ;;
   }
 
-  dimension: no_unused_labels_refund_from_firstscan {
-    type: number
+  measure: no_unused_labels_refund_from_firstscan {
+    type: sum
     sql: ${TABLE}.no_unused_labels_refund_from_firstscan ;;
   }
 
-  dimension: label_purchase_cost {
-    type: number
+  measure: label_purchase_cost {
+    type: sum
     sql: ${TABLE}.label_purchase_cost ;;
   }
 
-  dimension: refunded_label_cost {
-    type: number
+  measure: refunded_label_cost {
+    type: sum
     sql: ${TABLE}.refunded_label_cost ;;
   }
 
-  dimension: unused_label_cost_from_status {
-    type: number
+  measure: unused_label_cost_from_status {
+    type: sum
     sql: ${TABLE}.unused_label_cost_from_status ;;
   }
 
-  dimension: unused_label_refund_cost_from_status {
-    type: number
+  measure: unused_label_refund_cost_from_status {
+    type: sum
     sql: ${TABLE}.unused_label_refund_cost_from_status ;;
   }
 
-  dimension: unused_label_cost_from_firstevent {
-    type: number
+  measure: unused_label_cost_from_firstevent {
+    type: sum
     sql: ${TABLE}.unused_label_cost_from_firstevent ;;
   }
 
-  dimension: unused_label_refund_cost_from_firstevent {
-    type: number
+  measure: unused_label_refund_cost_from_firstevent {
+    type: sum
     sql: ${TABLE}.unused_label_refund_cost_from_firstevent ;;
   }
 
-  dimension: unused_label_cost_from_deliverydate {
-    type: number
+  measure: unused_label_cost_from_deliverydate {
+    type: sum
     sql: ${TABLE}.unused_label_cost_from_deliverydate ;;
   }
 
-  dimension: unused_label_refund_cost_from_deliverydate {
-    type: number
+  measure: unused_label_refund_cost_from_deliverydate {
+    type: sum
     sql: ${TABLE}.unused_label_refund_cost_from_deliverydate ;;
   }
 
-  dimension: unused_label_cost_from_firstscan {
-    type: number
+  measure: unused_label_cost_from_firstscan {
+    type: sum
     sql: ${TABLE}.unused_label_cost_from_firstscan ;;
   }
 
-  dimension: unused_label_refund_cost_from_firstscan {
-    type: number
+  measure: unused_label_refund_cost_from_firstscan {
+    type: sum
     sql: ${TABLE}.unused_label_refund_cost_from_firstscan ;;
   }
 
   set: detail {
     fields: [
         carrier_name,
-	purchase_month,
-	track_first_event_month,
-	avg_cost_per_lbl,
-	no_labels_purchased,
-	no_labels_refunded,
-	no_unused_labels_purchased_from_status,
-	no_unused_labels_refunded_from_status,
-	no_unused_labels_purchased_from_firstevent,
-	no_unused_labels_refunded_from_firstevent,
-	no_unused_labels_purchased_from_deliverydate,
-	no_unused_labels_refund_from_deliverydate,
-	no_unused_labels_purchased_from_firstscan,
-	no_unused_labels_refund_from_firstscan,
-	label_purchase_cost,
-	refunded_label_cost,
-	unused_label_cost_from_status,
-	unused_label_refund_cost_from_status,
-	unused_label_cost_from_firstevent,
-	unused_label_refund_cost_from_firstevent,
-	unused_label_cost_from_deliverydate,
-	unused_label_refund_cost_from_deliverydate,
-	unused_label_cost_from_firstscan,
-	unused_label_refund_cost_from_firstscan
+  purchase_month,
+  track_first_event_month,
+  avg_cost_per_lbl,
+  no_labels_purchased,
+  no_labels_refunded,
+  no_unused_labels_purchased_from_status,
+  no_unused_labels_refunded_from_status,
+  no_unused_labels_purchased_from_firstevent,
+  no_unused_labels_refunded_from_firstevent,
+  no_unused_labels_purchased_from_deliverydate,
+  no_unused_labels_refund_from_deliverydate,
+  no_unused_labels_purchased_from_firstscan,
+  no_unused_labels_refund_from_firstscan,
+  label_purchase_cost,
+  refunded_label_cost,
+  unused_label_cost_from_status,
+  unused_label_refund_cost_from_status,
+  unused_label_cost_from_firstevent,
+  unused_label_refund_cost_from_firstevent,
+  unused_label_cost_from_deliverydate,
+  unused_label_refund_cost_from_deliverydate,
+  unused_label_cost_from_firstscan,
+  unused_label_refund_cost_from_firstscan
     ]
   }
 }
