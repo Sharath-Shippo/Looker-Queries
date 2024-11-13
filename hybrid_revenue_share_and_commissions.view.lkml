@@ -478,7 +478,7 @@ registration_source_commission,
       --;
           )
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
-      where registration_source_commission in ('pulse','Fulfil.IO', 'fulfil-io')
+      where registration_source_commission in ('pulse','Fulfil.IO', 'fulfil-io','fulfil.io')
         --and transaction_type in ('Purchase','Refund')
       GROUP BY 1,2,3,4,5,6,7,8
       union
