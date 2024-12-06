@@ -561,7 +561,9 @@ view: sql_runner_query {
                                (
                                    --'Purchase'
                                    --,
-                                   'Refund'
+                                   'Refund',
+                                  'Carrier Refund',
+                                  'Customer Refund'
                                    -- ,
                                    --'Surcharge',
                                    --'Adjustment',
