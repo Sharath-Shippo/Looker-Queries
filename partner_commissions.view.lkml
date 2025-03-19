@@ -27,7 +27,7 @@ view: partner_commissions {
           --platform_name,
 
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           sum(quantity) as Labels_count,
           COALESCE(SUM((CASE
                             WHEN  carrier_own_account_indicator   IN ('Managed 3rd Party Master Account') THEN 0 --CeC
@@ -199,8 +199,8 @@ view: partner_commissions {
 
       -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -251,7 +251,7 @@ view: partner_commissions {
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
       where registration_source_mapped in ('fishbowl','freestyle','boxstorm','orangemarmalade','zibbet','veeqo','integrasoft','shuup','spoton','1440','square','westerncomputer','commerce7','loupe tech inc.')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
 
       union
       --registration_source_mapped in ('snapfulfil')
@@ -282,7 +282,7 @@ view: partner_commissions {
           --platform_name,
 
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           sum(quantity) as Labels_count,
           COALESCE(SUM((CASE
                             WHEN  carrier_own_account_indicator   IN ('Managed 3rd Party Master Account') THEN 0 --CeC
@@ -451,8 +451,8 @@ view: partner_commissions {
 
       -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -504,7 +504,7 @@ view: partner_commissions {
       where registration_source_mapped in ('snapfulfil')
         and user_id not in ('117603','186650')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
 
 
       union
@@ -536,7 +536,7 @@ view: partner_commissions {
           --platform_name,
 
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           sum(quantity) as Labels_count,
           COALESCE(SUM((CASE
                             WHEN  carrier_own_account_indicator   IN ('Managed 3rd Party Master Account') THEN 0 --CeC
@@ -705,8 +705,8 @@ view: partner_commissions {
 
       -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -758,7 +758,7 @@ view: partner_commissions {
       where registration_source_mapped in ('skulabs')
         and entry_method_type='API'
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
 
       union
       --store_platform_name in ('Bigcommerce','Godaddy','WooCommerce')
@@ -788,7 +788,7 @@ view: partner_commissions {
           --platform_name,
 
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           sum(quantity) as Labels_count,
           COALESCE(SUM((CASE
                             WHEN  carrier_own_account_indicator   IN ('Managed 3rd Party Master Account') THEN 0 --CeC
@@ -957,8 +957,8 @@ view: partner_commissions {
 
       -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -1009,7 +1009,7 @@ view: partner_commissions {
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
       where store_platform_name in ('Bigcommerce','Godaddy','WooCommerce')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
       union
 --store_platform_name in ('wix') and (entry_method_type) <> 'wix-elements'
 SELECT
@@ -1038,7 +1038,7 @@ SELECT
     --platform_name,
 
     --carrier_service_level_name,
-    --transaction_type,
+    transaction_type,
     sum(quantity) as Labels_count,
     COALESCE(SUM((CASE
                       WHEN  carrier_own_account_indicator   IN ('Managed 3rd Party Master Account') THEN 0 --CeC
@@ -1207,8 +1207,8 @@ FROM
 
 -- Transaction Type (need to determine inv chrg/ refund)
             CASE
-                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                 WHEN ptd.parcel_type = 'return' THEN 'return'
                 ELSE 'outbound'
                 END                              AS cust_transaction_type,
@@ -1260,7 +1260,7 @@ FROM
 where ((entry_method_type) <> 'wix-elements' OR (entry_method_type ) IS NULL)
   AND (store_platform_name ) = 'Wix'
   --and transaction_type in ('Purchase','Refund')
-GROUP BY 1,2,3,4,5,6,7,8,9,10,11
+GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
 union
 SELECT
     'Partner Commissions' as Category,
@@ -1288,7 +1288,7 @@ SELECT
     --platform_name,
 
     --carrier_service_level_name,
-    --transaction_type,
+    transaction_type,
     sum(quantity) as Labels_count,
     COALESCE(SUM((CASE
                       WHEN  carrier_own_account_indicator   IN ('Managed 3rd Party Master Account') THEN 0 --CeC
@@ -1457,8 +1457,8 @@ FROM
 
 -- Transaction Type (need to determine inv chrg/ refund)
             CASE
-                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                 WHEN ptd.parcel_type = 'return' THEN 'return'
                 ELSE 'outbound'
                 END                              AS cust_transaction_type,
@@ -1510,7 +1510,7 @@ FROM
 where entry_method_type = 'WIX-ELEMENTS'
 
 --and transaction_type in ('Purchase','Refund')
-GROUP BY 1,2,3,4,5,6,7,8,9,10,11;;
+GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12;;
   }
 
   measure: count {
@@ -1556,6 +1556,11 @@ GROUP BY 1,2,3,4,5,6,7,8,9,10,11;;
   dimension: purchase_date_mon {
     type: string
     sql: ${TABLE}.purchase_date_mon ;;
+  }
+
+  dimension: transaction_type {
+    type: string
+    sql: ${TABLE}.transaction_type ;;
   }
 
   dimension: carrier_name {
@@ -1651,6 +1656,7 @@ GROUP BY 1,2,3,4,5,6,7,8,9,10,11;;
       carrier_name,
       carrier_own_account_indicator,
       user_payment_method,
+      transaction_type,
       labels_count,
       label_markup,
       insurance_markup,
