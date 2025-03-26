@@ -15,7 +15,7 @@ view: hybrid_revenue_share_and_commissions {
           carrier_name,
 registration_source_commission,
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           --plan_name,
           --entry_method_type,
 
@@ -186,8 +186,8 @@ registration_source_commission,
 
       -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -258,7 +258,7 @@ registration_source_commission,
           carrier_name,
 registration_source_commission,
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           --plan_name,
           --entry_method_type,
 
@@ -428,8 +428,8 @@ registration_source_commission,
 
       -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -669,8 +669,8 @@ registration_source_commission,
 
       -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -748,6 +748,11 @@ registration_source_commission,
   dimension: registration_source_commission {
     type: string
     sql: ${TABLE}.registration_source_commission ;;
+  }
+
+  dimension: transaction_type {
+    type: string
+    sql: ${TABLE}.transaction_type ;;
   }
 
   dimension: company_name {
@@ -835,6 +840,7 @@ registration_source_commission,
       category,
       user_id,
       purchase_date_mon,
+      transaction_type,
       company_name,
       registration_source_mapped,
       carrier_own_account_indicator,
