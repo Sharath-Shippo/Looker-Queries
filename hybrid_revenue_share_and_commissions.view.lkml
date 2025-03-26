@@ -240,7 +240,7 @@ registration_source_commission,
         and registration_source_mapped in ('shiphero','squarespace','jetti','ShipHero', 'shiphero-prospect','loupe tech inc.')
 
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8
+      GROUP BY 1,2,3,4,5,6,7,8,9
       union
 
       --registration_source_commission in ('pulse','Fulfil.IO', 'fulfil-io')
@@ -480,7 +480,7 @@ registration_source_commission,
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
       where registration_source_mapped in ('pulse','Fulfil.IO', 'fulfil-io','Fulfil.IO','fulfil.io')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8
+      GROUP BY 1,2,3,4,5,6,7,8,9
       union
 
       --registration_source_commission in ('commentsold')
@@ -499,7 +499,7 @@ registration_source_commission,
           carrier_name,
 registration_source_commission,
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           --plan_name,
           --entry_method_type,
 
@@ -722,7 +722,7 @@ registration_source_commission,
       where registration_source_mapped in ('commentsold')
         and entry_method_type='API'
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8 ;;
+      GROUP BY 1,2,3,4,5,6,7,8,9 ;;
   }
 
   measure: count {
