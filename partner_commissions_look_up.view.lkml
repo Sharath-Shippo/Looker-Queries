@@ -27,7 +27,7 @@ view: partner_commissions_look_up {
           platform_name,
 
           --carrier_service_level_name,
-          --transaction_type,
+          transaction_type,
           sum(quantity) as Labels_count,
           COALESCE(SUM((CASE
                             WHEN  carrier_own_account_indicator   IN ('Managed 3rd Party Master Account') THEN 0 --CeC
@@ -196,8 +196,8 @@ view: partner_commissions_look_up {
 
                   -- Transaction Type (need to determine inv chrg/ refund)
                   CASE
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
-                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund') THEN 'outbound/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') AND ptd.parcel_type = 'return' THEN 'return/refund'
+                      WHEN (rsd.refund_status IS NOT NULL OR ttd.transaction_type = 'Refund'OR ttd.transaction_type = 'Carrier Refund' OR ttd.transaction_type = 'Customer Refund') THEN 'outbound/refund'
                       WHEN ptd.parcel_type = 'return' THEN 'return'
                       ELSE 'outbound'
                       END                              AS cust_transaction_type,
@@ -249,7 +249,7 @@ view: partner_commissions_look_up {
       --where registration_source_mapped in ('snapfulfil')
         --where user_id not in ('117603','186650')
       --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12 ;;
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13 ;;
   }
 
   measure: count {
@@ -285,6 +285,11 @@ view: partner_commissions_look_up {
   dimension: registration_source_mapped {
     type: string
     sql: ${TABLE}.registration_source_mapped ;;
+  }
+
+  dimension: transaction_type {
+    type: string
+    sql: ${TABLE}.transaction_type ;;
   }
 
   dimension: plan_name {
@@ -390,6 +395,7 @@ view: partner_commissions_look_up {
   company_name,
   store_platform_name,
   registration_source_mapped,
+  transaction_type,
   plan_name,
   purchase_date_mon,
   carrier_name,
