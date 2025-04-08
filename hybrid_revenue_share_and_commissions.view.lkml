@@ -9,6 +9,7 @@ view: hybrid_revenue_share_and_commissions {
           company_name,
           registration_source_mapped,
           carrier_own_account_indicator,
+          breakage_indicator,
           --user_payment_method,
           --platform_name,
           --store_platform_name,
@@ -146,6 +147,7 @@ registration_source_commission,
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  lf.breakage_indicator,
       -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -240,7 +242,7 @@ registration_source_commission,
         and registration_source_mapped in ('shiphero','squarespace','jetti','ShipHero', 'shiphero-prospect','loupe tech inc.')
 
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9
+      GROUP BY 1,2,3,4,5,6,7,8,9,10
       union
 
       --registration_source_commission in ('pulse','Fulfil.IO', 'fulfil-io')
@@ -252,6 +254,7 @@ registration_source_commission,
           company_name,
           registration_source_mapped,
           carrier_own_account_indicator,
+          breakage_indicator,
           --user_payment_method,
           --platform_name,
           --store_platform_name,
@@ -388,6 +391,7 @@ registration_source_commission,
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  lf.breakage_indicator,
       -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -480,7 +484,7 @@ registration_source_commission,
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
       where registration_source_mapped in ('pulse','Fulfil.IO', 'fulfil-io','Fulfil.IO','fulfil.io')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9
+      GROUP BY 1,2,3,4,5,6,7,8,9,10
       union
 
       --registration_source_commission in ('commentsold')
@@ -493,6 +497,7 @@ registration_source_commission,
           company_name,
           registration_source_mapped,
           carrier_own_account_indicator,
+          breakage_indicator,
           --user_payment_method,
           --platform_name,
           --store_platform_name,
@@ -629,6 +634,7 @@ registration_source_commission,
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  lf.breakage_indicator,
       -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -722,7 +728,7 @@ registration_source_commission,
       where registration_source_mapped in ('commentsold')
         and entry_method_type='API'
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9 ;;
+      GROUP BY 1,2,3,4,5,6,7,8,9,10 ;;
   }
 
   measure: count {
@@ -768,6 +774,11 @@ registration_source_commission,
   dimension: carrier_own_account_indicator {
     type: string
     sql: ${TABLE}.carrier_own_account_indicator ;;
+  }
+
+  dimension: breakage_indicator {
+    type: string
+    sql: ${TABLE}.breakage_indicator ;;
   }
 
   dimension: carrier_name {
@@ -844,6 +855,7 @@ registration_source_commission,
       company_name,
       registration_source_mapped,
       carrier_own_account_indicator,
+      breakage_indicator,
       carrier_name,
       labels_count,
       label_markup,
