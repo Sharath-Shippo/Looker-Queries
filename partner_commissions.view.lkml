@@ -22,7 +22,7 @@ view: partner_commissions {
           purchase_date_mon,
           carrier_name,
           carrier_own_account_indicator,
-
+breakage_indicator,
           user_payment_method,
           --platform_name,
 
@@ -159,6 +159,7 @@ view: partner_commissions {
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  lf.breakage_indicator,
       -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -251,7 +252,7 @@ view: partner_commissions {
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
       where registration_source_mapped in ('fishbowl','freestyle','boxstorm','orangemarmalade','zibbet','veeqo','integrasoft','shuup','spoton','1440','square','westerncomputer','commerce7','loupe tech inc.')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
 
       union
       --registration_source_mapped in ('snapfulfil')
@@ -277,7 +278,7 @@ view: partner_commissions {
           purchase_date_mon,
           carrier_name,
           carrier_own_account_indicator,
-
+breakage_indicator,
           user_payment_method,
           --platform_name,
 
@@ -411,6 +412,7 @@ view: partner_commissions {
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  breakage_indicator,
       -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -504,7 +506,7 @@ view: partner_commissions {
       where registration_source_mapped in ('snapfulfil')
         and user_id not in ('117603','186650')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
 
 
       union
@@ -531,7 +533,7 @@ view: partner_commissions {
           purchase_date_mon,
           carrier_name,
           carrier_own_account_indicator,
-
+breakage_indicator,
           user_payment_method,
           --platform_name,
 
@@ -665,6 +667,7 @@ view: partner_commissions {
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  lf.breakage_indicator,
       -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -758,7 +761,7 @@ view: partner_commissions {
       where registration_source_mapped in ('skulabs')
         and entry_method_type='API'
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
 
       union
       --store_platform_name in ('Bigcommerce','Godaddy','WooCommerce')
@@ -783,7 +786,7 @@ view: partner_commissions {
           purchase_date_mon,
           carrier_name,
           carrier_own_account_indicator,
-
+breakage_indicator,
           user_payment_method,
           --platform_name,
 
@@ -917,6 +920,7 @@ view: partner_commissions {
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  lf.breakage_indicator,
       -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -1009,7 +1013,7 @@ view: partner_commissions {
       --carrier_own_account_indicator<>'Managed 3rd Party Master Account'
       where store_platform_name in ('Bigcommerce','Godaddy','WooCommerce')
         --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
       union
 --store_platform_name in ('wix') and (entry_method_type) <> 'wix-elements'
 SELECT
@@ -1033,7 +1037,7 @@ SELECT
     purchase_date_mon,
     carrier_name,
     carrier_own_account_indicator,
-
+breakage_indicator,
     user_payment_method,
     --platform_name,
 
@@ -1167,6 +1171,7 @@ FROM
             lf.quantity,
             lf.payment_provider_fee,
             lf.purchase_date_dim_id,
+            breakage_indicator,
 -- Attribute Fields
             zd.zone_name,
             -- Missing txn object state
@@ -1260,7 +1265,7 @@ FROM
 where ((entry_method_type) <> 'wix-elements' OR (entry_method_type ) IS NULL)
   AND (store_platform_name ) = 'Wix'
   --and transaction_type in ('Purchase','Refund')
-GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
+GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
 union
 SELECT
     'Partner Commissions' as Category,
@@ -1283,7 +1288,7 @@ SELECT
     purchase_date_mon,
     carrier_name,
     carrier_own_account_indicator,
-
+breakage_indicator,
     user_payment_method,
     --platform_name,
 
@@ -1417,6 +1422,7 @@ FROM
             lf.quantity,
             lf.payment_provider_fee,
             lf.purchase_date_dim_id,
+            breakage_indicator,
 -- Attribute Fields
             zd.zone_name,
             -- Missing txn object state
@@ -1510,7 +1516,7 @@ FROM
 where entry_method_type = 'WIX-ELEMENTS'
 
 --and transaction_type in ('Purchase','Refund')
-GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12;;
+GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13;;
   }
 
   measure: count {
@@ -1571,6 +1577,11 @@ GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12;;
   dimension: carrier_own_account_indicator {
     type: string
     sql: ${TABLE}.carrier_own_account_indicator ;;
+  }
+
+  dimension: breakage_indicator {
+    type: string
+    sql: ${TABLE}.breakage_indicator ;;
   }
 
   dimension: user_payment_method {
@@ -1655,6 +1666,7 @@ GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12;;
       purchase_date_mon,
       carrier_name,
       carrier_own_account_indicator,
+      breakage_indicator,
       user_payment_method,
       transaction_type,
       labels_count,
