@@ -22,7 +22,7 @@ view: partner_commissions_look_up {
           purchase_date_mon,
           carrier_name,
           carrier_own_account_indicator,
-
+breakage_indicator,
           user_payment_method,
           platform_name,
 
@@ -156,6 +156,7 @@ view: partner_commissions_look_up {
                   lf.quantity,
                   lf.payment_provider_fee,
                   lf.purchase_date_dim_id,
+                  breakage_indicator,
                   -- Attribute Fields
                   zd.zone_name,
                   -- Missing txn object state
@@ -249,7 +250,7 @@ view: partner_commissions_look_up {
       --where registration_source_mapped in ('snapfulfil')
         --where user_id not in ('117603','186650')
       --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13 ;;
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14 ;;
   }
 
   measure: count {
@@ -310,6 +311,11 @@ view: partner_commissions_look_up {
   dimension: carrier_own_account_indicator {
     type: string
     sql: ${TABLE}.carrier_own_account_indicator ;;
+  }
+
+  dimension: breakage_indicator {
+    type: string
+    sql: ${TABLE}.breakage_indicator ;;
   }
 
   dimension: user_payment_method {
@@ -400,6 +406,7 @@ view: partner_commissions_look_up {
   purchase_date_mon,
   carrier_name,
   carrier_own_account_indicator,
+  breakage_indicator,
   user_payment_method,
   platform_name,
   labels_count,
