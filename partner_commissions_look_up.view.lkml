@@ -108,7 +108,7 @@ breakage_indicator,
                    user_dim AS (SELECT
                                     user_table.*,
                                     platform_table.payment_method platform_payment_method
-                                FROM prod.user_dim user_table
+                                FROM prod.user_dim_vw user_table
                                          LEFT JOIN (
                                     SELECT distinct platform_id, payment_method
                                     FROM prod.user_dim
