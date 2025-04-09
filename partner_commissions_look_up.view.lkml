@@ -24,7 +24,7 @@ view: partner_commissions_look_up {
           carrier_own_account_indicator,
 breakage_indicator,
           user_payment_method,
-          platform_name,
+          --platform_name,
 
           --carrier_service_level_name,
           transaction_type,
@@ -250,7 +250,7 @@ breakage_indicator,
       --where registration_source_mapped in ('snapfulfil')
         --where user_id not in ('117603','186650')
       --and transaction_type in ('Purchase','Refund')
-      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14 ;;
+      GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13 ;;
   }
 
   measure: count {
@@ -321,11 +321,6 @@ breakage_indicator,
   dimension: user_payment_method {
     type: string
     sql: ${TABLE}.user_payment_method ;;
-  }
-
-  dimension: platform_name {
-    type: string
-    sql: ${TABLE}.platform_name ;;
   }
 
   measure: labels_count {
@@ -408,7 +403,6 @@ breakage_indicator,
   carrier_own_account_indicator,
   breakage_indicator,
   user_payment_method,
-  platform_name,
   labels_count,
   label_markup,
   insurance_markup,
